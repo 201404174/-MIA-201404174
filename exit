@@ -1,0 +1,209 @@
+[33mcommit 3c4959f3608c5bbf578af36e9e74dc34a135ffbb[m
+Author: 201404174 <alejandroo.her@gmail.com>
+Date:   Sat Aug 6 22:56:26 2016 -0600
+
+    first commit
+
+[1mdiff --git a/AdministradorDiscos.cbp b/AdministradorDiscos.cbp[m
+[1mnew file mode 100644[m
+[1mindex 0000000..325f6da[m
+[1m--- /dev/null[m
+[1m+++ b/AdministradorDiscos.cbp[m
+[36m@@ -0,0 +1,42 @@[m
+[32m+[m[32m<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>[m
+[32m+[m[32m<CodeBlocks_project_file>[m
+[32m+[m	[32m<FileVersion major="1" minor="6" />[m
+[32m+[m	[32m<Project>[m
+[32m+[m		[32m<Option title="AdministradorDiscos" />[m
+[32m+[m		[32m<Option pch_mode="2" />[m
+[32m+[m		[32m<Option compiler="gcc" />[m
+[32m+[m		[32m<Build>[m
+[32m+[m			[32m<Target title="Debug">[m
+[32m+[m				[32m<Option output="bin/Debug/AdministradorDiscos" prefix_auto="1" extension_auto="1" />[m
+[32m+[m				[32m<Option object_output="obj/Debug/" />[m
+[32m+[m				[32m<Option type="1" />[m
+[32m+[m				[32m<Option compiler="gcc" />[m
+[32m+[m				[32m<Compiler>[m
+[32m+[m					[32m<Add option="-g" />[m
+[32m+[m				[32m</Compiler>[m
+[32m+[m			[32m</Target>[m
+[32m+[m			[32m<Target title="Release">[m
+[32m+[m				[32m<Option output="bin/Release/AdministradorDiscos" prefix_auto="1" extension_auto="1" />[m
+[32m+[m				[32m<Option object_output="obj/Release/" />[m
+[32m+[m				[32m<Option type="1" />[m
+[32m+[m				[32m<Option compiler="gcc" />[m
+[32m+[m				[32m<Compiler>[m
+[32m+[m					[32m<Add option="-O2" />[m
+[32m+[m				[32m</Compiler>[m
+[32m+[m				[32m<Linker>[m
+[32m+[m					[32m<Add option="-s" />[m
+[32m+[m				[32m</Linker>[m
+[32m+[m			[32m</Target>[m
+[32m+[m		[32m</Build>[m
+[32m+[m		[32m<Compiler>[m
+[32m+[m			[32m<Add option="-Wall" />[m
+[32m+[m		[32m</Compiler>[m
+[32m+[m		[32m<Unit filename="main.c">[m
+[32m+[m			[32m<Option compilerVar="CC" />[m
+[32m+[m		[32m</Unit>[m
+[32m+[m		[32m<Extensions>[m
+[32m+[m			[32m<code_completion />[m
+[32m+[m			[32m<debugger />[m
+[32m+[m		[32m</Extensions>[m
+[32m+[m	[32m</Project>[m
+[32m+[m[32m</CodeBlocks_project_file>[m
+[1mdiff --git a/AdministradorDiscos.layout b/AdministradorDiscos.layout[m
+[1mnew file mode 100644[m
+[1mindex 0000000..35bb5ae[m
+[1m--- /dev/null[m
+[1m+++ b/AdministradorDiscos.layout[m
+[36m@@ -0,0 +1,9 @@[m
+[32m+[m[32m<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>[m
+[32m+[m[32m<CodeBlocks_layout_file>[m
+[32m+[m	[32m<ActiveTarget name="Debug" />[m
+[32m+[m	[32m<File name="main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">[m
+[32m+[m		[32m<Cursor>[m
+[32m+[m			[32m<Cursor1 position="3876" topLine="44" />[m
+[32m+[m		[32m</Cursor>[m
+[32m+[m	[32m</File>[m
+[32m+[m[32m</CodeBlocks_layout_file>[m
+[1mdiff --git a/bin/Debug/AdministradorDiscos b/bin/Debug/AdministradorDiscos[m
+[1mnew file mode 100644[m
+[1mindex 0000000..6e3260d[m
+Binary files /dev/null and b/bin/Debug/AdministradorDiscos differ
+[1mdiff --git a/main.c b/main.c[m
+[1mnew file mode 100644[m
+[1mindex 0000000..3839b9e[m
+[1m--- /dev/null[m
+[1m+++ b/main.c[m
+[36m@@ -0,0 +1,126 @@[m
+[32m+[m[32m#include <stdio.h>[m
+[32m+[m[32m#include <stdlib.h>[m
+[32m+[m[32m#include <string.h>[m
+[32m+[m[32m/*[m
+[32m+[m[32m    Globales[m
+[32m+[m[32m*/[m
+[32m+[m[32mchar comando[400];[m
+[32m+[m[32mchar segundoComando[400];[m
+[32m+[m[32mchar tempComando[400];[m
+[32m+[m[32m/*[m
+[32m+[m[32m    Se declaran metodos[m
+[32m+[m[32m*/[m
+[32m+[m[32mvoid iniciarSistema();[m
+[32m+[m[32mvoid recoleccionComandos(char *instruccion,char *lineaInstrucciones);[m
+[32m+[m[32m/*[m
+[32m+[m[32m    Metodo principal[m
+[32m+[m[32m*/[m
+[32m+[m
+[32m+[m[32mint main()[m
+[32m+[m[32m{[m
+[32m+[m[32m    int opcion;[m
+[32m+[m[32m    printf("--------------------------------------------\n");[m
+[32m+[m[32m    printf("BIENVENIDO AL SISTEMA DE DISCOS\n");[m
+[32m+[m[32m    printf("--------------------------------------------\n");[m
+[32m+[m[32m    do{[m
+[32m+[m[32m        printf("1. Commands\n");[m
+[32m+[m[32m        printf("2.Exit System\n");[m
+[32m+[m[32m        scanf( "%i", &opcion);[m
+[32m+[m
+[32m+[m[32m        if(opcion ==1){[m
+[32m+[m[32m            //llamando a metodo de iniciar sistema[m
+[32m+[m[32m            iniciarSistema();[m
+[32m+[m[32m        }else if(opcion==2){[m
+[32m+[m[32m            break;[m
+[32m+[m[32m        }else{[m
+[32m+[m[32m            printf("No existe esa opcion\n");[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }while(opcion!=2);[m
+[32m+[m
+[32m+[m
+[32m+[m[32m    return 0;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/*[m
+[32m+[m[32m    Metodos[m
+[32m+[m[32m*/[m
+[32m+[m[32mvoid iniciarSistema(){[m
+[32m+[m[32m    printf("--------------------------------------------\n");[m
+[32m+[m[32m    printf("CONSOLA\n");[m
+[32m+[m[32m    printf("--------------------------------------------\n");[m
+[32m+[m[32m    printf("Porfavor Ingrese un comando\n");[m
+[32m+[m[32m    scanf(" %[^\n]s", comando);[m
+[32m+[m
+[32m+[m[32m    if(comando[0]=='#'){[m
+[32m+[m[32m        printf("ES UN COMENTARIO\n");[m
+[32m+[m[32m    }else if(comando[strlen(comando)-1]=='\\'){[m
+[32m+[m[32m        scanf(" %[^\n]s", segundoComando);[m
+[32m+[m[32m        strncpy(tempComando, comando, strlen(comando)-1);[m
+[32m+[m[32m        strcat(tempComando, segundoComando);[m
+[32m+[m[32m        strcpy(comando, tempComando);[m
+[32m+[m[32m        char *comandoInstruccion = strtok(tempComando, " ");[m
+[32m+[m[32m       /* printf("%s\n",segundoComando);[m
+[32m+[m[32m        printf("%s\n",comando);[m
+[32m+[m[32m        printf("%s\n",lineaComparable);[m
+[32m+[m[32m        printf("%s\n",Lista[1]);*/[m
+[32m+[m[32m        recoleccionComandos(comandoInstruccion, comando);[m
+[32m+[m[32m    }else{[m
+[32m+[m[32m        //copia el comando original a otro apuntador[m
+[32m+[m[32m        strcpy(tempComando, comando);[m
+[32m+[m[32m        //obtiene la primera palabra de la cadena[m
+[32m+[m[32m        char *comandoInstruccion = strtok(tempComando, " ");[m
+[32m+[m[32m        recoleccionComandos(comandoInstruccion, comando);[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+[32m+[m[32mvoid recoleccionComandos(char *instruccion,char *lineaInstrucciones){[m
+[32m+[m[32mint size[50];[m
+[32m+[m[32mchar unit[10]="nada";[m
+[32m+[m[32mchar path[400];[m
+[32m+[m[32m    //Crear disco[m
+[32m+[m[32m    if(strcasecmp(instruccion,"mkdisk")==0){[m
+[32m+[m[32m        char *temp=strtok(lineaInstrucciones," ");[m
+[32m+[m[32m        while((temp = strtok(NULL,"::"))!=NULL){[m
+[32m+[m[32m            if(strcasecmp(temp,"-size")==0){[m
+[32m+[m[32m                temp = strtok(NULL, " ");[m
+[32m+[m[32m                if (temp[0] == ':'){[m
+[32m+[m[32m                memmove(temp, temp+1, strlen(temp));[m
+[32m+[m[32m                }[m
+[32m+[m[32m                strcpy(size, temp);[m
+[32m+[m[32m                //printf("size%\n",size);[m
+[32m+[m[32m            }else if(strcasecmp(temp,"+unit")==0){[m
+[32m+[m[32m                      temp = strtok(NULL, " ");[m
+[32m+[m[32m                if (temp[0] == ':'){[m
+[32m+[m[32m                memmove(temp, temp+1, strlen(temp));[m
+[32m+[m[32m                }[m
+[32m+[m[32m                strcpy(unit, temp);[m
+[32m+[m[32m               // printf("unit%s\n",unit);[m
+[32m+[m[32m            }else if(strcasecmp(temp,"-path")==0){[m
+[32m+[m[32m                temp = strtok(NULL, " ");[m
+[32m+[m[32m                if (temp[0] == ':'){[m
+[32m+[m[32m                memmove(temp, temp+1, strlen(temp));[m
+[32m+[m[32m                }[m
+[32m+[m[32m                strcpy(path, temp);[m
+[32m+[m[32m               // printf("path%s\n",path);[m
+[32m+[m[32m            }else if(strcasecmp(temp,"-name")==0){[m
+[32m+[m[32m                          temp = strtok(NULL, " ");[m
+[32m+[m[32m                if (temp[0] == ':'){[m
+[32m+[m[32m                memmove(temp, temp+1, strlen(temp));[m
+[32m+[m[32m                }[m
+[32m+[m[32m                strcpy(unit, temp);[m
+[32m+[m[32m              //  printf("name %s\n",name);[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m
+[32m+[m[32m        printf("ESTOY EN CREAR DISCO\n");[m
+[32m+[m[32m    }else if(strcasecmp(instruccion,"rmdisk")==0){[m
+[32m+[m[32m        char *temp=strtok(lineaInstrucciones," ");[m
+[32m+[m[32m        while((temp = strtok(NULL,"::"))!=NULL){[m
+[32m+[m[32m            if(strcasecmp(temp,"-path")==0){[m
+[32m+[m[32m                temp = strtok(NULL, " ");[m
+[32m+[m[32m                if (temp[0] == ':'){[m
+[32m+[m[32m                memmove(temp, temp+1, strlen(temp));[m
+[32m+[m[32m                }[m
+[32m+[m[32m                strcpy(path, temp);[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+[1mdiff --git a/obj/Debug/main.o b/obj/Debug/main.o[m
+[1mnew file mode 100644[m
+[1mindex 0000000..9d862fd[m
+Binary files /dev/null and b/obj/Debug/main.o differ
