@@ -73,9 +73,14 @@ void iniciarSistema(){
     }
 }
 void recoleccionComandos(char *instruccion,char *lineaInstrucciones){
-int size[50];
+char size[50];
 char unit[10]="nada";
 char path[400];
+char name[100];
+char type[50]="nada";
+char fit[50]="nada";
+char eliminar[100]="nada";
+char add[50]="nada";
     //Crear disco
     if(strcasecmp(instruccion,"mkdisk")==0){
         char *temp=strtok(lineaInstrucciones," ");
@@ -120,6 +125,68 @@ char path[400];
                 memmove(temp, temp+1, strlen(temp));
                 }
                 strcpy(path, temp);
+            }
+        }
+    }else if(strcasecmp(instruccion,"fdisk")==0){
+         char *temp=strtok(lineaInstrucciones," ");
+    //    temp = strtok(NULL,"::");
+        while((temp = strtok(NULL,"::"))!=NULL){
+            if(strcasecmp(temp,"-size")==0){
+                temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(size, temp);
+               // printf("size%s\n",size);
+            }else if(strcasecmp(temp,"+unit")==0){
+                      temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(unit, temp);
+              //  printf("unit%s\n",unit);
+            }else if(strcasecmp(temp,"-path")==0){
+                temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(path, temp);
+                //printf("path%s\n",path);
+            }else if(strcasecmp(temp,"+type")==0){
+                          temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(type, temp);
+              //  printf("type %s\n",type);
+            }else if(strcasecmp(temp,"+fit")==0){
+                temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(fit, temp);
+               // printf("fit %s\n",fit);
+            }else if(strcasecmp(temp,"+delete")==0){
+                temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(eliminar, temp);
+              //  printf("delryr %s\n",eliminar);
+            }else if(strcasecmp(temp,"-name")==0){
+                temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(name, temp);
+               // printf("name %s\n",name);
+            }else if(strcasecmp(temp,"+add")==0){
+                temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(add, temp);
+               // printf("add %s\n",add);
             }
         }
     }
