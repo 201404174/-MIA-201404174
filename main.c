@@ -81,6 +81,15 @@ char type[50]="nada";
 char fit[50]="nada";
 char eliminar[100]="nada";
 char add[50]="nada";
+char id[100];
+char k[50];
+char m[50];
+char h[50];
+char i[50];
+char hC[50];
+char n[50];
+char fs[50];
+char ruta[100];
     //Crear disco
     if(strcasecmp(instruccion,"mkdisk")==0){
         char *temp=strtok(lineaInstrucciones," ");
@@ -137,14 +146,12 @@ char add[50]="nada";
                 memmove(temp, temp+1, strlen(temp));
                 }
                 strcpy(size, temp);
-               // printf("size%s\n",size);
             }else if(strcasecmp(temp,"+unit")==0){
                       temp = strtok(NULL, " ");
                 if (temp[0] == ':'){
                 memmove(temp, temp+1, strlen(temp));
                 }
                 strcpy(unit, temp);
-              //  printf("unit%s\n",unit);
             }else if(strcasecmp(temp,"-path")==0){
                 temp = strtok(NULL, " ");
                 if (temp[0] == ':'){
@@ -158,36 +165,175 @@ char add[50]="nada";
                 memmove(temp, temp+1, strlen(temp));
                 }
                 strcpy(type, temp);
-              //  printf("type %s\n",type);
             }else if(strcasecmp(temp,"+fit")==0){
                 temp = strtok(NULL, " ");
                 if (temp[0] == ':'){
                 memmove(temp, temp+1, strlen(temp));
                 }
                 strcpy(fit, temp);
-               // printf("fit %s\n",fit);
             }else if(strcasecmp(temp,"+delete")==0){
                 temp = strtok(NULL, " ");
                 if (temp[0] == ':'){
                 memmove(temp, temp+1, strlen(temp));
                 }
                 strcpy(eliminar, temp);
-              //  printf("delryr %s\n",eliminar);
             }else if(strcasecmp(temp,"-name")==0){
                 temp = strtok(NULL, " ");
                 if (temp[0] == ':'){
                 memmove(temp, temp+1, strlen(temp));
                 }
                 strcpy(name, temp);
-               // printf("name %s\n",name);
             }else if(strcasecmp(temp,"+add")==0){
                 temp = strtok(NULL, " ");
                 if (temp[0] == ':'){
                 memmove(temp, temp+1, strlen(temp));
                 }
                 strcpy(add, temp);
-               // printf("add %s\n",add);
+
             }
         }
+    }else if(strcasecmp(instruccion,"mount")==0){
+         char *temp=strtok(lineaInstrucciones," ");
+        while((temp = strtok(NULL,"::"))!=NULL){
+            if(strcasecmp(temp,"-path")==0){
+                temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(path, temp);
+            }else if(strcasecmp(temp,"-name")==0){
+                temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(name, temp);
+            }
+        }
+    }else if(strcasecmp(instruccion,"umount")==0){
+        char idTemp[]="-idx";
+        int conta=1;
+        char *temp=strtok(lineaInstrucciones," ");
+        while((temp = strtok(NULL,"::"))!=NULL){
+            idTemp[3] = conta + '0';
+            if(strcasecmp(temp,idTemp)==0){
+                temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(id, temp);
+            }
+            conta++;
+        }
+    }else if(strcasecmp(instruccion,"Df")==0){
+            char *temp=strtok(lineaInstrucciones," ");
+        while((temp = strtok(NULL,"::"))!=NULL){
+            if(strcasecmp(temp,"+k")==0){
+                strcpy(k, "k");
+            }else if(strcasecmp(temp,"+m")==0){
+                strcpy(m, "m");
+            }else if(strcasecmp(temp,"+h")==0){
+                strcpy(hC, "h");
+            }else if(strcasecmp(temp,"+i")==0){
+                strcpy(i, "i");
+            }
+        }
+    }else if(strcasecmp(instruccion,"Du")==0){
+        char *temp=strtok(lineaInstrucciones," ");
+        while((temp = strtok(NULL,"::"))!=NULL){
+            if(strcasecmp(temp,"-h")==0){
+                strcpy(h, "h");
+            }else if(strcasecmp(temp,"+n")==0){
+                  temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(n, temp);
+            }else if(strcasecmp(temp,"+path")==0){
+                   temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(path, temp);
+            }
+        }
+    }else if(strcasecmp(instruccion,"mkfs")==0){
+        char *temp=strtok(lineaInstrucciones," ");
+        while((temp = strtok(NULL,"::"))!=NULL){
+            if(strcasecmp(temp,"-id")==0){
+                    temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(id, temp);
+            }else if(strcasecmp(temp,"+type")==0){
+                  temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(type, temp);
+            }else if(strcasecmp(temp,"+add")==0){
+                   temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(add, temp);
+            }else if(strcasecmp(temp,"+unit")==0){
+                   temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(unit, temp);
+            }else if(strcasecmp(temp,"+fs")==0){
+                   temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(fs, temp);
+            }
+        }
+    }else if(strcasecmp(instruccion ,"rep")==0){
+        char *temp=strtok(lineaInstrucciones," ");
+        while((temp = strtok(NULL,"::"))!=NULL){
+            if(strcasecmp(temp,"-name")==0){
+                   temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(name, temp);
+            }else if(strcasecmp(temp,"-path")==0){
+                  temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(path, temp);
+            }else if(strcasecmp(temp,"-id")==0){
+                   temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(id, temp);
+            }else if(strcasecmp(temp,"+ruta")==0){
+                   temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(ruta, temp);
+            }
+            printf("Rep\n");
+        }
+    }else if(strcasecmp(instruccion ,"exec")==0){
+        char *temp=strtok(lineaInstrucciones," ");
+        while((temp = strtok(NULL,"::"))!=NULL){
+            if(strcasecmp(temp,"-path")==0){
+                   temp = strtok(NULL, " ");
+                if (temp[0] == ':'){
+                memmove(temp, temp+1, strlen(temp));
+                }
+                strcpy(path, temp);
+            }
+        }
+        printf("Exec\n");
+    }else{
+        printf("%s no es parte de los comandos de este sistema. Verifique y vuelva a intentar",instruccion);
     }
 }
